@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class RecordWhistleViewController: UIViewController {
+class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
     
     var stackView: UIStackView!
     var recordButton: UIButton!
@@ -59,6 +59,35 @@ class RecordWhistleViewController: UIViewController {
         
         stackView.addArrangedSubview(failLabel)
     } // loadFailUI
+    
+    func startRecording() {
+        
+        view.backgroundColor = UIColor(red: 0.6, green: 0, blue: 0, alpha: 1)
+        
+        recordButton.setTitle("Tap To Stop", for: .normal)
+        
+        let audioURL = RecordWhistleViewController.getWhistleURL()
+        print(audioURL.absoluteString)
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+        
+        do {
+            whistleRecorder = try AVAudioRecorder(url: audioURL, settings: settings)
+            whistleRecorder.delegate = self
+            whistleRecorder.record()
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+    
+    func finishRecording(success: Bool) {
+        
+    }
     
     override func loadView() {
         view = UIView()
