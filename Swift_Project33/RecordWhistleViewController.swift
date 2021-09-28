@@ -42,7 +42,12 @@ class RecordWhistleViewController: UIViewController {
     }
     
     func loadRecordingUI() {
-        
+        recordButton = UIButton()
+        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        recordButton.setTitle("Tap To Record", for: .normal)
+        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(recordButton)
     } // loadRecordingUI
     
     func loadFailUI() {
@@ -65,6 +70,10 @@ class RecordWhistleViewController: UIViewController {
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    @objc func recordTapped() {
+        
     }
 
 }
