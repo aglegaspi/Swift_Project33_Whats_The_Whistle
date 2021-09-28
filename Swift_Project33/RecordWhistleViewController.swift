@@ -17,7 +17,37 @@ class RecordWhistleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Record Your Whistle"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Record", style: .plain, target: nil, action: nil)
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        self.loadRecordingUI()
+                    } else {
+                        self.loadFailUI()
+                    } // else if
+                } // DispatchQueue
+                
+            } //recordingSession
+        } catch {
+            self.loadFailUI()
+        } // catch
     }
+    
+    func loadRecordingUI() {
+        
+    } // loadRecordingUI
+    
+    func loadFailUI() {
+        
+    } // loadFailUI
     
     override func loadView() {
         view = UIView()
