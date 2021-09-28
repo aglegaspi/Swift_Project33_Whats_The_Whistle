@@ -86,7 +86,21 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func finishRecording(success: Bool) {
+        view.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0, alpha: 1)
         
+        whistleRecorder.stop()
+        whistleRecorder = nil
+        
+        if success {
+            recordButton.setTitle("Tap To Re-record", for: .normal)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextTapped))
+        } else {
+            recordButton.setTitle("Tap To Record", for: .normal)
+            
+            let ac = UIAlertController(title: "Recording Failed", message: "There was a problem recording please try again", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
     }
     
     override func loadView() {
@@ -108,6 +122,10 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @objc func recordTapped() {
+        
+    }
+    
+    @objc func nextTapped() {
         
     }
     
