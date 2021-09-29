@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC02C2B627051F04002166E2 /* SelectGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2B527051F04002166E2 /* SelectGenreViewController.swift */; };
 		EC8F5BC52703B86800512C26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8F5BC42703B86800512C26 /* AppDelegate.swift */; };
 		EC8F5BC72703B86800512C26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8F5BC62703B86800512C26 /* SceneDelegate.swift */; };
 		EC8F5BC92703B86800512C26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8F5BC82703B86800512C26 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC02C2B527051F04002166E2 /* SelectGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenreViewController.swift; sourceTree = "<group>"; };
 		EC8F5BC12703B86800512C26 /* Swift_Project33.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift_Project33.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8F5BC42703B86800512C26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC8F5BC62703B86800512C26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				EC8F5BC42703B86800512C26 /* AppDelegate.swift */,
 				EC8F5BC62703B86800512C26 /* SceneDelegate.swift */,
 				EC8F5BD82703BB2400512C26 /* RecordWhistleViewController.swift */,
+				EC02C2B527051F04002166E2 /* SelectGenreViewController.swift */,
 				EC8F5BC82703B86800512C26 /* ViewController.swift */,
 				EC8F5BCA2703B86800512C26 /* Main.storyboard */,
 				EC8F5BCD2703B86A00512C26 /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 			files = (
 				EC8F5BC92703B86800512C26 /* ViewController.swift in Sources */,
 				EC8F5BC52703B86800512C26 /* AppDelegate.swift in Sources */,
+				EC02C2B627051F04002166E2 /* SelectGenreViewController.swift in Sources */,
 				EC8F5BD92703BB2400512C26 /* RecordWhistleViewController.swift in Sources */,
 				EC8F5BC72703B86800512C26 /* SceneDelegate.swift in Sources */,
 			);
