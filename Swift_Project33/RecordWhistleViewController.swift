@@ -14,32 +14,7 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
     var recordButton: UIButton!
     var recordingSession: AVAudioSession!
     var whistleRecorder: AVAudioRecorder!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = "Record Your Whistle"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Record", style: .plain, target: nil, action: nil)
-        
-        recordingSession = AVAudioSession.sharedInstance()
-        
-        do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
-            try recordingSession.setActive(true)
-            recordingSession.requestRecordPermission() { [unowned self] allowed in
-                DispatchQueue.main.async {
-                    if allowed {
-                        self.loadRecordingUI()
-                    } else {
-                        self.loadFailUI()
-                    } // else if
-                } // DispatchQueue
-                
-            } //recordingSession
-        } catch {
-            self.loadFailUI()
-        } // catch
-    }
+    var playButton: UIButton!
     
     func loadRecordingUI() {
         recordButton = UIButton()
@@ -49,6 +24,16 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
         
         stackView.addArrangedSubview(recordButton)
+        
+        playButton = UIButton()
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.setTitle("Tap To Play", for: .normal)
+        playButton.isHidden = true
+        playButton.alpha = 0
+        playButton.titleLabel?.font = .preferredFont(forTextStyle: .title1)
+        playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(playButton)
+        
     } // loadRecordingUI
     
     func loadFailUI() {
@@ -109,6 +94,33 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
+    //MARK: - LIFECYCLES
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Record Your Whistle"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Record", style: .plain, target: nil, action: nil)
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        self.loadRecordingUI()
+                    } else {
+                        self.loadFailUI()
+                    } // else if
+                } // DispatchQueue
+                
+            } //recordingSession
+        } catch {
+            self.loadFailUI()
+        } // catch
+    }
+    
     override func loadView() {
         view = UIView()
         
@@ -127,6 +139,7 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
+    //MARK: - OBJ-C FUNCTIONS
     @objc func recordTapped() {
         if whistleRecorder == nil {
             startRecording()
@@ -139,6 +152,11 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         
     }
     
+    @objc func playTapped() {
+        
+    }
+    
+    //MARK: - CLASS FUNCTIONS
     class func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
