@@ -10,12 +10,15 @@ import AVFoundation
 
 class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
     
+    //MARK: - PROPERTIES
     var stackView: UIStackView!
     var recordButton: UIButton!
     var recordingSession: AVAudioSession!
     var whistleRecorder: AVAudioRecorder!
     var playButton: UIButton!
+    var whistlePlayer: AVAudioPlayer!
     
+    //MARK: - FUNCTIONS
     func loadRecordingUI() {
         recordButton = UIButton()
         recordButton.translatesAutoresizingMaskIntoConstraints = false
@@ -117,7 +120,16 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @objc func playTapped() {
+        let audioURL = RecordWhistleViewController.getWhistleURL()
         
+        do {
+            whistlePlayer = try AVAudioPlayer(contentsOf: audioURL)
+            whistlePlayer.play()
+        } catch {
+            let ac = UIAlertController(title: "Playback Failed", message: "There was an issue playing your whistle. Please try re-recording.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
     }
     
     //MARK: - CLASS FUNCTIONS
