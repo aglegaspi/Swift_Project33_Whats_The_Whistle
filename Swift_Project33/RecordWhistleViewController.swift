@@ -78,6 +78,14 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         
         if success {
             recordButton.setTitle("Tap To Re-record", for: .normal)
+            
+            if playButton.isHidden {
+                UIView.animate(withDuration: 0.35) { [unowned self] in
+                    self.playButton.isHidden = false
+                    self.playButton.alpha = 1
+                }
+            }
+            
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextTapped))
         } else {
             recordButton.setTitle("Tap To Record", for: .normal)
@@ -88,11 +96,48 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         }
     } //finishRecording
     
+    
+    //MARK: - OBJ-C FUNCTIONS
+    @objc func recordTapped() {
+        if !playButton.isHidden {
+            UIView.animate(withDuration: 0.35) { [unowned self] in
+                self.playButton.isHidden = true
+                self.playButton.alpha = 0
+            }
+        }
+        if whistleRecorder == nil {
+            startRecording()
+        } else {
+            finishRecording(success: true)
+        }
+    }
+    
+    @objc func nextTapped() {
+        
+    }
+    
+    @objc func playTapped() {
+        
+    }
+    
+    //MARK: - CLASS FUNCTIONS
+    class func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    class func getWhistleURL() -> URL {
+        return getDocumentsDirectory().appendingPathComponent("whistle.m4a")
+    }
+    
+    //MARK: - DELEGATE
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
             finishRecording(success: false)
         }
     }
+    
     
     //MARK: - LIFECYCLES
     override func viewDidLoad() {
@@ -139,33 +184,7 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    //MARK: - OBJ-C FUNCTIONS
-    @objc func recordTapped() {
-        if whistleRecorder == nil {
-            startRecording()
-        } else {
-            finishRecording(success: true)
-        }
-    }
     
-    @objc func nextTapped() {
-        
-    }
-    
-    @objc func playTapped() {
-        
-    }
-    
-    //MARK: - CLASS FUNCTIONS
-    class func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-    
-    class func getWhistleURL() -> URL {
-        return getDocumentsDirectory().appendingPathComponent("whistle.m4a")
-    }
 
 }
 
