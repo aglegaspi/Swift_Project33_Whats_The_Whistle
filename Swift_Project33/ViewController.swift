@@ -18,8 +18,8 @@ class ViewController: UIViewController {
     }
     
     @objc func addWhistle() {
-        //let vc = RecordWhistleViewController()
-        //navigationController?.pushViewController(vc, animated: true)
+        let vc = RecordWhistleViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 

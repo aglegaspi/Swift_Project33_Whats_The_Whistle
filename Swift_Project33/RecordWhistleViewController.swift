@@ -83,7 +83,7 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         } catch {
             finishRecording(success: false)
         }
-    }
+    } // startRecording
     
     func finishRecording(success: Bool) {
         view.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0, alpha: 1)
@@ -100,6 +100,12 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
             let ac = UIAlertController(title: "Recording Failed", message: "There was a problem recording please try again", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
+        }
+    } //finishRecording
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
         }
     }
     
