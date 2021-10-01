@@ -16,11 +16,8 @@ class AddCommentsViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        title = "Comments"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
     }
     
     override func loadView() {
@@ -37,6 +34,10 @@ class AddCommentsViewController: UIViewController, UITextViewDelegate {
         comments.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         comments.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         comments.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+    }
+    
+    @objc func submitTapped() {
         
     }
 
