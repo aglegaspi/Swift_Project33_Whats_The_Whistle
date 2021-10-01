@@ -24,6 +24,18 @@ class SubmitViewController: UIViewController {
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        doSubmission()
+    }
+    
+    func doSubmission() {
+        
+    }
+    
+    @objc func dontTapped() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = .gray
