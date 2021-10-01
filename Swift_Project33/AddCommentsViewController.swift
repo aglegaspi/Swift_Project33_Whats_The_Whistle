@@ -38,7 +38,21 @@ class AddCommentsViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func submitTapped() {
+        let vc = SubmitViewController()
+        vc.genre = genre
         
+        if comments.text == placeholder {
+            vc.comments = ""
+        } else {
+            vc.comments = comments.text
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == placeholder {
+            textView.text = ""
+        }
     }
 
 }
