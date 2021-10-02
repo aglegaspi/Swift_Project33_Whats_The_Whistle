@@ -30,7 +30,13 @@ class SubmitViewController: UIViewController {
     }
     
     func doSubmission() {
-    
+        let whistleRecord = CKRecord(recordType: "Whistles")
+        whistleRecord["genre"] = genre as CKRecordValue
+        whistleRecord["comments"] = comments as CKRecordValue
+        
+        let audioURL = RecordWhistleViewController.getWhistleURL()
+        let whistleAsset = CKAsset(fileURL: audioURL)
+        whistleRecord["audio"] = whistleAsset
     }
     
     @objc func dontTapped() {
