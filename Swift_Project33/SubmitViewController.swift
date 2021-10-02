@@ -37,9 +37,26 @@ class SubmitViewController: UIViewController {
         let audioURL = RecordWhistleViewController.getWhistleURL()
         let whistleAsset = CKAsset(fileURL: audioURL)
         whistleRecord["audio"] = whistleAsset
+        
+        CKContainer.default().publicCloudDatabase.save(whistleRecord) { [unowned self] record, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.status.text = "Error: \(error.localizedDescription)"
+                    print(error)
+                    self.spinner.stopAnimating()
+                } else {
+                    self.view.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0, alpha: 1)
+                    self.status.text = "Done!"
+                    self.spinner.stopAnimating()
+                    
+                    ViewController.isDirty = true
+                }
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneTapped))
+            }
+        }
     }
     
-    @objc func dontTapped() {
+    @objc func doneTapped() {
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -76,4 +93,8 @@ class SubmitViewController: UIViewController {
         stackView.addArrangedSubview(spinner)
     }
 
+}
+
+extension ViewController {
+    static var isDirty = true
 }
