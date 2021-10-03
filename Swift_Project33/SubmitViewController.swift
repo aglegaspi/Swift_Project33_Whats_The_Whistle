@@ -12,6 +12,7 @@ class SubmitViewController: UIViewController {
     
     var genre: String!
     var comments: String!
+    var date: Date!
     
     var stackView: UIStackView!
     var status: UILabel!
@@ -33,6 +34,7 @@ class SubmitViewController: UIViewController {
         let whistleRecord = CKRecord(recordType: "Whistles")
         whistleRecord["genre"] = genre as CKRecordValue
         whistleRecord["comments"] = comments as CKRecordValue
+        whistleRecord["date"] = date as CKRecordValue
         
         let audioURL = RecordWhistleViewController.getWhistleURL()
         let whistleAsset = CKAsset(fileURL: audioURL)
