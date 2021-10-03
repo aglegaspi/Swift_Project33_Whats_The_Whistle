@@ -11,6 +11,7 @@
 		EC02C2B8270529E7002166E2 /* AddCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2B7270529E7002166E2 /* AddCommentsViewController.swift */; };
 		EC02C2BA270779BA002166E2 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2B9270779BA002166E2 /* SubmitViewController.swift */; };
 		EC02C2BE2708C753002166E2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC02C2BD2708C753002166E2 /* CloudKit.framework */; };
+		EC02C2C2270A1BF6002166E2 /* Whistle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2C1270A1BF6002166E2 /* Whistle.swift */; };
 		EC8F5BC52703B86800512C26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8F5BC42703B86800512C26 /* AppDelegate.swift */; };
 		EC8F5BC72703B86800512C26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8F5BC62703B86800512C26 /* SceneDelegate.swift */; };
 		EC8F5BC92703B86800512C26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8F5BC82703B86800512C26 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 		EC02C2B9270779BA002166E2 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		EC02C2BB2708C735002166E2 /* Swift_Project33.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swift_Project33.entitlements; sourceTree = "<group>"; };
 		EC02C2BD2708C753002166E2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		EC02C2C1270A1BF6002166E2 /* Whistle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whistle.swift; sourceTree = "<group>"; };
 		EC8F5BC12703B86800512C26 /* Swift_Project33.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift_Project33.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8F5BC42703B86800512C26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC8F5BC62703B86800512C26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				EC02C2B7270529E7002166E2 /* AddCommentsViewController.swift */,
 				EC02C2B9270779BA002166E2 /* SubmitViewController.swift */,
 				EC8F5BC82703B86800512C26 /* ViewController.swift */,
+				EC02C2C1270A1BF6002166E2 /* Whistle.swift */,
 				EC8F5BCA2703B86800512C26 /* Main.storyboard */,
 				EC8F5BCD2703B86A00512C26 /* Assets.xcassets */,
 				EC8F5BCF2703B86A00512C26 /* LaunchScreen.storyboard */,
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC02C2C2270A1BF6002166E2 /* Whistle.swift in Sources */,
 				EC02C2BA270779BA002166E2 /* SubmitViewController.swift in Sources */,
 				EC8F5BC92703B86800512C26 /* ViewController.swift in Sources */,
 				EC8F5BC52703B86800512C26 /* AppDelegate.swift in Sources */,
