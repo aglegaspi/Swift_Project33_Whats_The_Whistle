@@ -14,10 +14,12 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         title = "What's that Whistle?"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWhistle))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
+        //register the cell reuse identifier
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +54,20 @@ class ViewController: UITableViewController {
     @objc func addWhistle() {
         let vc = RecordWhistleViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // use dynamic type to ensure user font choices and set number of lines to unlimited
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.attributedText = makeAttributedString(title: whistles[indexPath.row].genre, subtitle: whistles[indexPath.row].comments)
+        cell.textLabel?.numberOfLines = 0
+        return cell
+    }
+    
+    // tell iOS how many rows we need
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.whistles.count
     }
 
 
