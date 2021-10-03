@@ -36,6 +36,19 @@ class ViewController: UITableViewController {
         
     }
     
+    func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.purple]
+        let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+        
+        let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
+        
+        if subtitle.count > 0 {
+            let subtitleString = NSAttributedString(string: "\n\(subtitle)", attributes: subtitleAttributes)
+            titleString.append(subtitleString)
+        }
+        return titleString
+    }
+    
     @objc func addWhistle() {
         let vc = RecordWhistleViewController()
         navigationController?.pushViewController(vc, animated: true)
