@@ -26,7 +26,7 @@ class ResultsViewController: UITableViewController {
         
         let reference = CKRecord.Reference(recordID: whistle.recordID, action: .deleteSelf)
         let pred = NSPredicate(format: "owningWhistle == %@", reference)
-        let sort = NSSortDescriptor(key: "creationDate", ascending: true)
+        let sort = NSSortDescriptor(key: "suggestionCreated", ascending: true)
         let query = CKQuery(recordType: "Suggestions", predicate: pred)
         query.sortDescriptors = [sort]
         
@@ -63,7 +63,7 @@ class ResultsViewController: UITableViewController {
         let whistleRecord = CKRecord(recordType: "Suggestions")
         let reference = CKRecord.Reference(recordID: whistle.recordID, action: .deleteSelf)
         whistleRecord["text"] = suggestion as CKRecordValue
-        whistleRecord["creationDate"] = Date() as CKRecordValue
+        whistleRecord["suggestionCreated"] = Date() as CKRecordValue
         // key for reference value
         whistleRecord["owningWhistle"] = reference as CKRecordValue
         
@@ -165,6 +165,7 @@ class ResultsViewController: UITableViewController {
                 let ac = UIAlertController(title: "Error", message: "Could obtain the Whistle: \(error.localizedDescription)", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(ac, animated: true)
+                
                 DispatchQueue.main.async {
                     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Download", style: .plain, target: self, action: #selector(self.downloadTapped))
                 }
@@ -183,7 +184,14 @@ class ResultsViewController: UITableViewController {
     }
     
     @objc func listenTapped() {
-        
+        do {
+            whistlePlayer = try AVAudioPlayer(contentsOf: whistle.audio)
+            whistlePlayer.play()
+        } catch {
+            let ac = UIAlertController(title: "Error", message: "Sorry could not play the audio: \(error.localizedDescription)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        }
     }
     
 }
