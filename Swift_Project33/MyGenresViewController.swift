@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class MyGenresViewController: UITableViewController {
     
@@ -28,7 +29,28 @@ class MyGenresViewController: UITableViewController {
     
     // MARK: - OBJ-C FUNCTIONS
     @objc func saveTapped() {
+        let defaults = UserDefaults.standard
+        defaults.set(myGenres, forKey: "myGenres")
         
+        let database = CKContainer.default().publicCloudDatabase
+        
+        database.fetchAllSubscriptions { [unowned self] subscriptions, error in
+            if error == nil {
+                if let subscriptions = subscriptions {
+                    for subscription in subscriptions {
+                        database.delete(withSubscriptionID: subscription.subscriptionID) { str, error in
+                            if error != nil {
+                                
+                                print(error!.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            } else {
+                print(error!.localizedDescription)
+            }
+            
+        }
     }
     
     // MARK: - Table view data source
