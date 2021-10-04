@@ -22,6 +22,30 @@ class ResultsViewController: UITableViewController {
         
     }
     
+    //MARK: - FUNCTIONS
+    func add(suggestion: String) {
+        // the record type for user suggestions
+        let whistleRecord = CKRecord(recordType: "Suggestions")
+        let reference = CKRecord.Reference(recordID: whistle.recordID, action: .deleteSelf)
+        whistleRecord["text"] = suggestion as CKRecordValue
+        whistleRecord["creationDate"] = Date() as CKRecordValue
+        // key for reference value
+        whistleRecord["owningWhistle"] = reference as CKRecordValue
+        
+        CKContainer.default().publicCloudDatabase.save(whistleRecord) { [unowned self] record, error in
+            DispatchQueue.main.async {
+                if error == nil {
+                    self.suggestions.append(suggestion)
+                    self.tableView.reloadData()
+                } else {
+                    let ac = UIAlertController(title: "Error", message: "There was a problem submitting your suggestion: \(error!.localizedDescription)", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(ac, animated: true)
+                }
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,7 +107,7 @@ class ResultsViewController: UITableViewController {
         ac.addAction(UIAlertAction(title: "Submit", style: .default) { [unowned self, ac] action in
             if let textField = ac.textFields?[0] {
                 if textField.text!.count > 0 {
-                    //self.add(suggestion: textField.text!)
+                    self.add(suggestion: textField.text!)
                 }
             }
             
