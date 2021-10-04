@@ -14,11 +14,21 @@ class MyGenresViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let defaults = UserDefaults.standard
+        if let savedGenres = defaults.object(forKey: "myGenres") as? [String] {
+            myGenres = savedGenres
+        } else {
+            myGenres = [String]()
+        }
+        
+        title = "Notify me about.."
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    // MARK: - OBJ-C FUNCTIONS
+    @objc func saveTapped() {
+        
     }
 
     // MARK: - Table view data source
