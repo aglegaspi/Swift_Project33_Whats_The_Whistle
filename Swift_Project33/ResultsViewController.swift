@@ -46,7 +46,16 @@ class ResultsViewController: UITableViewController {
     
     //MARK: - FUNCTIONS
     func parseResults(records: [CKRecord]) {
+        var newSuggestions = [String]()
         
+        for record in records {
+            newSuggestions.append(record["text"] as! String)
+        }
+        
+        DispatchQueue.main.async { [unowned self] in
+            self.suggestions = newSuggestions
+            self.tableView.reloadData()
+        }
     }
     
     func add(suggestion: String) {
