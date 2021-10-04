@@ -155,6 +155,35 @@ class ResultsViewController: UITableViewController {
     
     //MARK: - OBJ-C FUNCTIONS
     @objc func downloadTapped() {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.tintColor = .black
+        spinner.startAnimating()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spinner)
+        
+        CKContainer.default().publicCloudDatabase.fetch(withRecordID: whistle.recordID) { [unowned self] record, error in
+            if let error = error {
+                let ac = UIAlertController(title: "Error", message: "Could obtain the Whistle: \(error.localizedDescription)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(ac, animated: true)
+                DispatchQueue.main.async {
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Download", style: .plain, target: self, action: #selector(self.downloadTapped))
+                }
+            } else {
+                if let record = record {
+                    if let asset = record["audio"] as? CKAsset {
+                        self.whistle.audio = asset.fileURL
+                        
+                        DispatchQueue.main.async {
+                            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Listen", style: .plain, target: self, action: #selector(self.listenTapped))
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func listenTapped() {
         
     }
+    
 }
