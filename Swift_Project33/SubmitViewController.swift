@@ -12,7 +12,7 @@ class SubmitViewController: UIViewController {
     
     var genre: String!
     var comments: String!
-    var date: Date!
+    var date = Date()
     
     var stackView: UIStackView!
     var status: UILabel!

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC01B4BF270AAC6300DC0777 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC01B4BE270AAC6300DC0777 /* ResultsViewController.swift */; };
 		EC02C2B627051F04002166E2 /* SelectGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2B527051F04002166E2 /* SelectGenreViewController.swift */; };
 		EC02C2B8270529E7002166E2 /* AddCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2B7270529E7002166E2 /* AddCommentsViewController.swift */; };
 		EC02C2BA270779BA002166E2 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02C2B9270779BA002166E2 /* SubmitViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC01B4BE270AAC6300DC0777 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		EC02C2B527051F04002166E2 /* SelectGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenreViewController.swift; sourceTree = "<group>"; };
 		EC02C2B7270529E7002166E2 /* AddCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentsViewController.swift; sourceTree = "<group>"; };
 		EC02C2B9270779BA002166E2 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				EC02C2B9270779BA002166E2 /* SubmitViewController.swift */,
 				EC8F5BC82703B86800512C26 /* ViewController.swift */,
 				EC02C2C1270A1BF6002166E2 /* Whistle.swift */,
+				EC01B4BE270AAC6300DC0777 /* ResultsViewController.swift */,
 				EC8F5BCA2703B86800512C26 /* Main.storyboard */,
 				EC8F5BCD2703B86A00512C26 /* Assets.xcassets */,
 				EC8F5BCF2703B86A00512C26 /* LaunchScreen.storyboard */,
@@ -171,6 +174,7 @@
 				EC8F5BC92703B86800512C26 /* ViewController.swift in Sources */,
 				EC8F5BC52703B86800512C26 /* AppDelegate.swift in Sources */,
 				EC02C2B627051F04002166E2 /* SelectGenreViewController.swift in Sources */,
+				EC01B4BF270AAC6300DC0777 /* ResultsViewController.swift in Sources */,
 				EC8F5BD92703BB2400512C26 /* RecordWhistleViewController.swift in Sources */,
 				EC02C2B8270529E7002166E2 /* AddCommentsViewController.swift in Sources */,
 				EC8F5BC72703B86800512C26 /* SceneDelegate.swift in Sources */,
