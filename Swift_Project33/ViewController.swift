@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
 
         title = "What's that Whistle?"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Genres", style: .plain, target: self, action: #selector(selectGenre))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWhistle))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
         //register the cell reuse identifier
@@ -102,6 +103,11 @@ class ViewController: UITableViewController {
     //MARK: - OBJ-C FUNCTIONS
     @objc func addWhistle() {
         let vc = RecordWhistleViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func selectGenre() {
+        let vc = MyGenresViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

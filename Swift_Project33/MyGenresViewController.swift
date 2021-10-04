@@ -8,6 +8,8 @@
 import UIKit
 
 class MyGenresViewController: UITableViewController {
+    
+    var myGenres: [String]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
