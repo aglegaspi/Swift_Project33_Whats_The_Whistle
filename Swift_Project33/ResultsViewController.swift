@@ -19,10 +19,36 @@ class ResultsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Genre: \(whistle.genre!)"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Download", style: .plain, target: self, action: #selector(downloadTapped))
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        let reference = CKRecord.Reference(recordID: whistle.recordID, action: .deleteSelf)
+        let pred = NSPredicate(format: "owningWhistle == %@", reference)
+        let sort = NSSortDescriptor(key: "creationDate", ascending: true)
+        let query = CKQuery(recordType: "Suggestions", predicate: pred)
+        query.sortDescriptors = [sort]
+        
+        CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { [unowned self] results, error in
+            if let error  = error {
+                print(error.localizedDescription)
+                let ac = UIAlertController(title: "Error", message: "There was a problem obtaining suggestions on this whistle: \(error.localizedDescription)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(ac, animated: true)
+            } else {
+                if let results = results {
+                    self.parseResults(records: results)
+                }
+            }
+        }
     }
     
     //MARK: - FUNCTIONS
+    func parseResults(records: [CKRecord]) {
+        
+    }
+    
     func add(suggestion: String) {
         // the record type for user suggestions
         let whistleRecord = CKRecord(recordType: "Suggestions")
@@ -55,7 +81,7 @@ class ResultsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
-            return "Suggest Songs"
+            return "Suggested Songs"
         }
         return nil
     }
@@ -115,6 +141,11 @@ class ResultsViewController: UITableViewController {
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
+        
+    }
+    
+    //MARK: - OBJ-C FUNCTIONS
+    @objc func downloadTapped() {
         
     }
 }
