@@ -59,7 +59,7 @@ class SubmitViewController: UIViewController {
     }
     
     @objc func doneTapped() {
-        _ = navigationController?.popViewController(animated: true)
+        _ = navigationController?.popToRootViewController(animated: true)
     }
     
     override func loadView() {

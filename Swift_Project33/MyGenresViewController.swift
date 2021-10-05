@@ -65,8 +65,9 @@ class MyGenresViewController: UITableViewController {
                             }
                         }
                     }
-                    
                 }
+                
+                
             } else {
                 let ac = UIAlertController(title: "Error", message: "Could not find any subscriptions: \(error!.localizedDescription)", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -74,6 +75,8 @@ class MyGenresViewController: UITableViewController {
             }
             
         }
+        
+        _ = navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - Table view data source
