@@ -29,24 +29,47 @@ class MyGenresViewController: UITableViewController {
     
     // MARK: - OBJ-C FUNCTIONS
     @objc func saveTapped() {
+        // save unique genres via user defaults
         let defaults = UserDefaults.standard
         defaults.set(myGenres, forKey: "myGenres")
         
         let database = CKContainer.default().publicCloudDatabase
         
+        // fetch subscriptions and flush out any existing subscriptions
         database.fetchAllSubscriptions { [unowned self] subscriptions, error in
             if error == nil {
                 if let subscriptions = subscriptions {
                     for subscription in subscriptions {
                         database.delete(withSubscriptionID: subscription.subscriptionID) { str, error in
                             if error != nil {
-                                
+                                let ac = UIAlertController(title: "Error", message: "Issue removing subscriptions: \(error!.localizedDescription)", preferredStyle: .alert)
+                                ac.addAction(UIAlertAction(title: "OK", style: .default))
                                 print(error!.localizedDescription)
                             }
                         }
                     }
+                    
+                    // create a subscription for the following genres and send a push notification when a new whistle of that genre is created
+                    for genre in self.myGenres {
+                        let predicate = NSPredicate(format: "genre = %@", genre)
+                        let subscription = CKQuerySubscription(recordType: "Whistles", predicate: predicate, options: .firesOnRecordCreation)
+                        let notification = CKSubscription.NotificationInfo()
+                        notification.alertBody = "There's a new whistle in the \(genre) genre."
+                        notification.soundName = "default"
+                        
+                        subscription.notificationInfo = notification
+                        
+                        database.save(subscription) { result, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                    
                 }
             } else {
+                let ac = UIAlertController(title: "Error", message: "Could not find any subscriptions: \(error!.localizedDescription)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
                 print(error!.localizedDescription)
             }
             
