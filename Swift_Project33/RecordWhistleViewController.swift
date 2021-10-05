@@ -162,7 +162,7 @@ class RecordWhistleViewController: UIViewController, AVAudioRecorderDelegate {
         recordingSession = AVAudioSession.sharedInstance()
         
         do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setCategory(.playAndRecord, mode: .default, policy: .default, options: .defaultToSpeaker)
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
