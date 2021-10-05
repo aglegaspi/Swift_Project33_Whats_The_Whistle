@@ -131,6 +131,25 @@ class ViewController: UITableViewController {
         vc.whistle = whistles[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            CKContainer.default().publicCloudDatabase.delete(withRecordID: whistles[indexPath.row].recordID) { _, error in
+                if error == nil {
+                    print("successfully deleted whistle")
+                    DispatchQueue.main.async {
+                        self.whistles.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .top)
+                        tableView.reloadData()
+                    }
+                    
+                } else {
+                    print(error!.localizedDescription)
+                }
+            }
+            
+        }
+    }
 
 }
 
