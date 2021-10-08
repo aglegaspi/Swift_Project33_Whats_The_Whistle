@@ -100,6 +100,19 @@ class ViewController: UITableViewController {
         return titleString
     }
     
+    func genreCellColor(genre: String) -> UIColor {
+        
+        switch genre {
+        case "Dance": return .systemRed
+        case "Pop": return .systemBlue
+        case "R&B": return .systemPink
+        case "Hip Hop": return .systemGreen
+            
+        default:
+            return .systemGray2
+        }
+    }
+    
     //MARK: - OBJ-C FUNCTIONS
     @objc func addWhistle() {
         let vc = RecordWhistleViewController()
@@ -118,6 +131,7 @@ class ViewController: UITableViewController {
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.attributedText = makeAttributedString(title: whistles[indexPath.row].genre, subtitle: whistles[indexPath.row].comments)
         cell.textLabel?.numberOfLines = 0
+        cell.backgroundColor = genreCellColor(genre: whistles[indexPath.row].genre)
         return cell
     }
     
